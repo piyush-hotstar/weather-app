@@ -1,25 +1,49 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Data from './Data';
+import Header from './Header';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      button: 0,
+      latitude: "59.337239",
+      longitude: "18.062381"
+    };
+  }
+
+  fixed = () => {
+    this.setState({button: 1});
+  }
+
+  current = () => {
+    
+    navigator.geolocation.getCurrentPosition( (position) => {
+      //console.log(position.coords.latitude + " " + position.coords.longitude)
+      this.setState({latitude: position.coords.latitude});
+      this.setState({longitude: position.coords.longitude});
+      this.setState({button: 2});
+    });
+  }
+  
+  render() {
+
+    if(this.state.button===0) {
+      return (
+        <Header fixed={this.fixed} current={this.current}/>
+      )
+    }
+    else {
+      {console.log(this.state.latitude + " -> " + this.state.longitude)}
+      return (
+        <Data latitude={this.state.latitude} longitude={this.state.longitude}/>
+      )
+    }
+    
+  }
+
 }
 
 export default App;
