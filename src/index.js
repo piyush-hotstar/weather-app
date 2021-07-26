@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Preapp from './Preapp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+  //const store = new Store();
   <React.StrictMode>
-    <App />
+    <Preapp/>
   </React.StrictMode>,
   document.getElementById('root')
 );
