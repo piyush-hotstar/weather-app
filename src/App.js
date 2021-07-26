@@ -6,8 +6,6 @@ import { observer } from "mobx-react-lite";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App ({store}) {
-
-    console.log("button " + store.buttonStatus);
     if(store.buttonStatus===0) {
       return (
         <Header store={store}/>
@@ -21,12 +19,10 @@ function App ({store}) {
       )
     }
     else {
-      //{console.log(store.latitudeStatus + " -> " + store.longitudeStatus)}
       return (
         <Data store={store}/>
       )
     }
-  //)
   
 } 
 
