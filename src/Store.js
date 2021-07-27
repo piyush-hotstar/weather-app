@@ -39,12 +39,14 @@ class Store {
     }
 
     current = () => {
-        navigator.geolocation.getCurrentPosition( (position) => {
+        this.message = null;
+        
+          navigator.geolocation.getCurrentPosition( (position) => {
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
           
-          this.message = null;
           this.button = 2;
+          
         },
         (error) => {
           if (error.code === error.PERMISSION_DENIED)
@@ -92,6 +94,7 @@ class Store {
             localStorage.setItem('localStorage', (JSON.stringify(response.data)));
             }
             catch (err) {
+            this.message = "Something went wrong. Showing you cached data."
             this.whole = JSON.parse(localStorage.getItem('localStorage'))
             this.loading=false
         }

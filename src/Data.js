@@ -3,7 +3,8 @@ import './App.css';
 import { observer } from "mobx-react-lite";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+import Accordion from 'react-bootstrap/Accordion';
 
 function Data ( {store} ) {
 
@@ -17,22 +18,26 @@ function Data ( {store} ) {
   const hourly = complete.hourly.data;
   const currently = complete.currently;
 
+  const center = {
+      display: "flex",
+      justifyContent: "center"
+  }
+
   return (
       <div className="container">
           {
-              store.message !=null ?
-          <Alert variant={"danger"}>{store.message}</Alert>
-          : null
+            store.message !=null ?
+            <Alert variant={"danger"}>{store.message}</Alert>
+            : null
           }
-          <h2>Coordiantes:</h2>
-          <h5>LATITUDE: {store.latitude}, LONGITUDE: {store.longitude}</h5>
-          <h2>Timezone:</h2>
-          <h5>{store.whole.timezone}</h5>
-          <h2>Current Temprature:</h2>
-          <h5>{currently.temperature} F</h5>
-          <h2>Current Weather:</h2>
-          <h5>{currently.summary}</h5>
-          <h2>Hourly statistics</h2>
+          <h5 style={center}>Coordinates: {store.latitude}, {store.longitude}</h5>
+          <h5 style={center}>Timezone: {store.whole.timezone}</h5>
+          <h1 style={center}>{currently.temperature} &deg;F</h1>
+          <h5 style={center}>{currently.summary}</h5>
+          <Accordion>
+          <Accordion.Item eventKey="0">
+          <Accordion.Header>Hourly statistics</Accordion.Header>
+          <Accordion.Body>
           <ol>
               <Table>
                   
@@ -58,6 +63,9 @@ function Data ( {store} ) {
               </tbody>
               </Table>
           </ol>
+          </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
       </div>
       
   )
