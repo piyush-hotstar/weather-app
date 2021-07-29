@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Preapp from './Preapp';
-import reportWebVitals from './reportWebVitals';
+import Preapp from './src/Preapp';
+import reportWebVitals from './src/reportWebVitals';
 import "@babel/polyfill";
 
 ReactDOM.render(

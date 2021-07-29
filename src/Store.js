@@ -7,10 +7,15 @@ import {
 } from "mobx";
 import axios from 'axios';
 
+/*
+this.coord = {latitude: position.coords.lat, longitude: …}
+*/
 class Store {
     button = 0;
-    latitude= "59.337239";
-    longitude= "18.062381";
+    coordinates = {
+        latitude: "59.337239",
+        longitude: "18.062381"
+    };
     loading = true;
     whole = {};
     message = "";
@@ -18,8 +23,7 @@ class Store {
     constructor() {
         makeObservable(this, {
             button: observable,
-            latitude: observable,
-            longitude: observable,
+            coordinates: observable,
             message: observable,
             buttonStatus: computed,
             latitudeStatus: computed,
@@ -34,18 +38,22 @@ class Store {
     }
 
     fixed = () => {
+        this.loading=true;
         this.button = 1;
         this.message = null;
+        this.coordinates = {latitude: "59.337239", longitude: "18.062381"}
     }
 
     current = () => {
+        this.loading=true;
         this.message = null;
-        
-          navigator.geolocation.getCurrentPosition( (position) => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          
-          this.button = 2;
+        this.button=2;
+        navigator.geolocation.getCurrentPosition( (position) => {
+              
+            this.coordinates = {latitude: position.coords.latitude, longitude: position.coords.longitude}
+            // console.log(this.coordinates.latitude)
+            // console.log(this.coordinates.langitude)
+            //this.button = 2;
           
         },
         (error) => {
@@ -58,12 +66,14 @@ class Store {
                 this.message = "It seems you are offline. Hence showing you cached data."
                 this.latitude = "59.337239";
                 this.longitude = "18.062381";
-                this.button = 2;
+                //this.button = 2;
             }
         }
+        
 
         
         );
+        this.loading=true;
     }
 
     get buttonStatus() {
@@ -71,11 +81,11 @@ class Store {
     }
 
     get latitudeStatus() {
-        return this.latitude;
+        return this.coordinates.latitude;
     }
 
     get longitudeStatus() {
-        return this.longitude;
+        return this.coordinateslongitude;
     }
 
     convert = (time) => {
@@ -88,16 +98,17 @@ class Store {
 
     getJson = async () => {
         try {
-            let response = await axios.get(`/forecast/2bb07c3bece89caf533ac9a5d23d8417/${this.latitude},${this.longitude}`)
+            let response = await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/${this.coordinates.latitude},${this.coordinates.longitude}`)
             this.whole = response.data
-            this.loading = false
             localStorage.setItem('localStorage', (JSON.stringify(response.data)));
-            }
+            this.loading = false
+        }
             catch (err) {
             this.message = "Something went wrong. Showing you cached data."
             this.whole = JSON.parse(localStorage.getItem('localStorage'))
             this.loading=false
         }
+        //this.button = 2;
     }
 }
 
