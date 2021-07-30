@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 function Header ({store}) {
 
   return (
-    <div className="container">
+    <div data-testid="header-1" className="container">
         <Button onClick={() => store.fixed()}> Fixed Location </Button>
         <Button variant="info" sty onClick={() => store.current()}> Current Location </Button>
     </div>

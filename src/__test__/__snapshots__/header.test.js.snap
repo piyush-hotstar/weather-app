@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches app snapshot 1`] = `
+<div
+  className="container"
+  data-testid="header-1"
+>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+     Fixed Location 
+  </button>
+  <button
+    className="btn btn-info"
+    disabled={false}
+    onClick={[Function]}
+    sty={true}
+    type="button"
+  >
+     Current Location 
+  </button>
+</div>
+`;
+
+exports[`matches data snapshot 1`] = `
+<div
+  className="container"
+  style={
+    Object {
+      "display": "flex",
+      "justifyContent": "center",
+      "marginTop": "400px",
+    }
+  }
+>
+  <span
+    className="css-1xdhyk6"
+  >
+    <span
+      className="css-dfmyvi"
+    />
+    <span
+      className="css-b9bjvj"
+    />
+    <span
+      className="css-dfmyvi"
+    />
+  </span>
+</div>
+`;
+
+exports[`matches header snapshot 1`] = `
+<div
+  className="container"
+  data-testid="header-1"
+>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+     Fixed Location 
+  </button>
+  <button
+    className="btn btn-info"
+    disabled={false}
+    onClick={[Function]}
+    sty={true}
+    type="button"
+  >
+     Current Location 
+  </button>
+</div>
+`;
+
+exports[`matches snapshot 1`] = `
+<div
+  className="container"
+  data-testid="header-1"
+>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+     Fixed Location 
+  </button>
+  <button
+    className="btn btn-info"
+    disabled={false}
+    onClick={[Function]}
+    sty={true}
+    type="button"
+  >
+     Current Location 
+  </button>
+</div>
+`;

@@ -35,10 +35,10 @@ function Data ( {store} ) {
                     <Alert variant={"danger"}>{store.message}</Alert>
                     : null
                 }
-                <h5 style={center}>Coordinates: {store.coordinates.latitude}, {store.coordinates.longitude}</h5>
-                <h5 style={center}>Timezone: {store.whole.timezone}</h5>
+                <h5 style={center} className="text-1xl">Coordinates: {store.coordinates.latitude}, {store.coordinates.longitude}</h5>
+                <h5 style={center} className="text-1xl">Timezone: {store.whole.timezone}</h5>
                 <h1 style={center} className="text-7xl">{currently.temperature} &deg;F</h1>
-                <h5 style={center} className="text-3xl">{currently.summary}</h5>
+                <h5 style={center} className="text-2xl">{currently.summary}</h5>
                 <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                 <Accordion.Header>Hourly statistics</Accordion.Header>

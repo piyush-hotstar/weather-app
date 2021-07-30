@@ -7,11 +7,11 @@
     "dev": "npm run watch:css && webpack --mode development --progress",
     "build": "webpack --mode production --progress",
     "build:css": "postcss src/tailwind.css -o src/main.css",
-    "watch:css": "postcss src/tailwind.css -o src/main.css"
+    "watch:css": "postcss src/tailwind.css -o src/main.css",
+    "test": "jest --env=jsdom"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
@@ -19,9 +19,11 @@
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
     "react": "^17.0.2",
+    "react-addons-test-utils": "^15.6.2",
     "react-bootstrap": "^2.0.0-beta.4",
     "react-dom": "^17.0.2",
     "react-spinners": "^0.11.0",
+    "react-test-renderer": "^17.0.2",
     "web-vitals": "^1.0.1"
   },
   "eslintConfig": {
@@ -49,15 +51,23 @@
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/react": "^11.2.7",
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^4.0.0-alpha",
+    "jest-dom": "^4.0.0",
     "postcss-cli": "^8.3.1",
+    "react-test-render": "^1.1.2",
     "style-loader": "^3.2.1",
     "tailwindcss": "^2.2.7",
     "webpack": "^4.17.1",
     "webpack-cli": "3.1.0",
     "webpack-dev-server": "3.1.7"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ]
   }
 }

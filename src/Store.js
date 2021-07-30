@@ -94,8 +94,6 @@ class Store {
         return date.toString("MMM dd");
     }
 
-    
-
     getJson = async () => {
         try {
             let response = await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/${this.coordinates.latitude},${this.coordinates.longitude}`)
