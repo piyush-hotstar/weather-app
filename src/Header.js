@@ -7,8 +7,8 @@ function Header ({store}) {
 
   return (
     <div data-testid="header-1" className="container">
-        <Button onClick={() => store.fixed()}> Fixed Location </Button>
-        <Button variant="info" sty onClick={() => store.current()}> Current Location </Button>
+        <Button onClick={() => store.fixed()} style={{marginTop: "400px", marginLeft: "600px", display: "inline", justifyContent: "center"}}> Fixed Location </Button>
+        <Button variant="info" onClick={() => store.current()} style={{display: "inline", marginTop: "400px", marginLeft: "50px"}} > Current Location </Button>
     </div>
     )
   

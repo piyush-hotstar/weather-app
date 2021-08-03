@@ -44,17 +44,17 @@ module.exports = {
     //     }
     //     ]
     // },
-    externals: {
-        'react': 'React',
-        'react/addons': 'react',
-        'react/lib/ExecutionEnvironment': 'react',
-        'react/lib/ReactContext': 'react',
-        'react-addons-test-utils': 'react-dom'
-    },
+    // externals: {
+    //     'react': 'React',
+    //     'react/addons': 'react',
+    //     'react/lib/ExecutionEnvironment': 'react',
+    //     'react/lib/ReactContext': 'react',
+    //     'react-addons-test-utils': 'react-dom'
+    // },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'
-        }),
+        })
         
     ]
       
