@@ -6,6 +6,7 @@ import {
     autorun,
 } from "mobx";
 import axios from 'axios';
+import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 /*
 this.coord = {latitude: position.coords.lat, longitude: …}
@@ -32,7 +33,8 @@ class Store {
             whole: observable,
             fixed: action,
             current: action,
-            convert: action
+            convert: action,
+            getDataFromLocal: action
         });
         autorun(this.getJson);
     }
@@ -49,12 +51,7 @@ class Store {
         this.message = null;
         this.button=2;
         navigator.geolocation.getCurrentPosition( (position) => {
-              
             this.coordinates = {latitude: position.coords.latitude, longitude: position.coords.longitude}
-            // console.log(this.coordinates.latitude)
-            // console.log(this.coordinates.langitude)
-            //this.button = 2;
-          
         },
         (error) => {
           if (error.code === error.PERMISSION_DENIED)
@@ -69,9 +66,6 @@ class Store {
                 //this.button = 2;
             }
         }
-        
-
-        
         );
         this.loading=true;
     }
@@ -94,17 +88,38 @@ class Store {
         return date.toString("MMM dd");
     }
 
+    getDataFromLocal = () => {
+        console.log("no internet ii")
+        this.message = "Something went wrong. Showing you cached data."
+        this.whole = JSON.parse(localStorage.getItem('localStorage'))
+        console.log(this.whole)
+        this.loading=false
+        
+    }
+
     getJson = async () => {
-        try {
-            let response = await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/${this.coordinates.latitude},${this.coordinates.longitude}`)
-            this.whole = response.data
-            localStorage.setItem('localStorage', (JSON.stringify(response.data)));
-            this.loading = false
+
+        if(!navigator.onLine) {
+            
+            this.getDataFromLocal();
+            this.message = "No internet connection. Showing you cached data."
+            console.log(this.loading);
         }
+        else {
+
+            try {
+                //axios.defaults.baseURL = 'https://api.darksky.net';
+                let response = await axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/${this.coordinates.latitude},${this.coordinates.longitude}`)
+                this.whole = response.data
+                localStorage.setItem('localStorage', (JSON.stringify(response.data)));
+                this.loading = false
+            }
             catch (err) {
-            this.message = "Something went wrong. Showing you cached data."
-            this.whole = JSON.parse(localStorage.getItem('localStorage'))
-            this.loading=false
+                this.getDataFromLocal();
+                
+                //return;
+        }
+
         }
         //this.button = 2;
     }
